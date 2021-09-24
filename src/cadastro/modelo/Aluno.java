@@ -34,6 +34,6 @@ public class Aluno extends Pessoa{
 	@Override
 	public String toString() {
 		return super.toString() +
-				" | Série=" + serie + " | Turma= " + turma;
+				" | Série: " + serie + " | Turma: " + turma;
 	}
 }

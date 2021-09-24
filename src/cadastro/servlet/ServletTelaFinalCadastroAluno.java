@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cadastro.modelo.Pessoa;
+import cadastro.modelo.Aluno;
 
-@WebServlet("/ServletTela1Cadastro")
-public class ServletTela1Cadastro extends HttpServlet {
+@WebServlet("/ServletTelaFinalCadastroAluno")
+public class ServletTelaFinalCadastroAluno extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
@@ -33,12 +33,12 @@ public class ServletTela1Cadastro extends HttpServlet {
 		String telefone= request.getParameter("campo-telefone");
 		String email= request.getParameter("campo-email");
 		String matricula= request.getParameter("campo-matricula");		
-		String tipoPessoa= request.getParameter("campo-tipo-pessoa");
-							
-		Pessoa pessoa= new Pessoa(nome, genero, 
+		int serie= Integer.parseInt(request.getParameter("campo-serie"));
+		String turma= request.getParameter("campo-turma");	
+		
+		Aluno aluno= new Aluno(nome, genero, 
 				LocalDateTime.of(anoNascimento, mesNascimento, diaNascimento, 0, 0), 
-				endereco, telefone, email, matricula);
-		TelaTipoPessoa telaTipoPessoa= TelaTipoPessoa.getValue(tipoPessoa);
+				endereco, telefone, email, matricula, serie, turma);
 		
 		saida.write("<!DOCTYPE html>");
 		saida.write("<html lang=\"pt-br\">");	
@@ -50,9 +50,17 @@ public class ServletTela1Cadastro extends HttpServlet {
 		
 		saida.write("<body>");		
 		
-		saida.write("<h1>Cadastro</h1>");
-				
-		telaTipoPessoa.apresentarCadastro(pessoa, saida);
+		saida.write("<h1>Cadastro concluido!</h1>");
+		
+		saida.write("<p>Nome: " + aluno.getNome() + " | ");
+		saida.write(aluno.getStringGenero() + " | ");
+		saida.write("Data de nascimento: " + aluno.getStringDataNascimento() + "</p>");
+		saida.write("<p>Endereco: " + aluno.getEndereco() + "</p>");	
+		saida.write("<p>Telefone: " + aluno.getTelefone() + " | ");	
+		saida.write("E-mail: " + aluno.getEmail() + "</p>");	
+		saida.write("<p>Matricula: " + aluno.getMatricula() + " | ");	
+		saida.write("Serie: " + aluno.getSerie() + "º ano | ");
+		saida.write("Turma: " + aluno.getTurma() + "</p>");
 		
 		saida.write("</body>");
 		saida.write("</html>");

@@ -21,8 +21,7 @@
 			<label for=campo-genero class="descricao-campo">Feminino</label>
 			<input type="radio" name="campo-genero" value="false"/>
 			
-			<br/><br/>
-			
+						
 			<label for="campo-nascimento-dia" class="descricao-campo">Data de nascimento</label>
 			<input type="text" name="campo-nascimento-dia" class="campo"/>
 			<input type="text" name="campo-nascimento-mes" class="campo"/>
@@ -38,8 +37,7 @@
 			<label for="campo-telefone" class="descricao-campo">Telefone</label>
 			<input type="text" name="campo-telefone" class="campo"/>
 			
-			<br/><br/>
-			
+						
 			<label for="campo-email" class="descricao-campo">E-mail</label>
 			<input type="text" name="campo-email" class="campo"/>
 			
@@ -47,6 +45,13 @@
 
 			<label for="campo-matricula" class="descricao-campo">Matrícula</label>
 			<input type="text" name="campo-matricula" class="campo"/>
+			
+			
+			<select name="campo-tipo-pessoa">
+				<option value="aluno" selected="selected">Aluno</option>
+				<option value="professor">Professor</option>
+				<option value="funcionario">Funcionário</option>
+			</select>
 			
 			<br/><br/>
 			
