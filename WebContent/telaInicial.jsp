@@ -9,7 +9,7 @@
 		
 		<h1>Cadastro</h1>
 		
-		<form action="ServletTela1Cadastro">
+		<form action="ServletTelaInicialCadastro">
 			<label for="campo-nome" class="descricao-campo">Nome</label>
 			<input type="text" name="campo-nome" class="campo"/>
 		

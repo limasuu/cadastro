@@ -1,8 +1,11 @@
 package cadastro.modelo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Funcionario extends Pessoa{
+	
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private String cargo;
 	private String setor;
@@ -37,6 +40,10 @@ public class Funcionario extends Pessoa{
 	public LocalDateTime getDataContratacao() {
 		return dataContratacao;
 	}
+	
+	public String getStringDataContratacao() {
+		return dataContratacao.format(formatter);
+	}
 
 	public void setDataContratacao(LocalDateTime dataContratacao) {
 		this.dataContratacao = dataContratacao;
@@ -44,6 +51,10 @@ public class Funcionario extends Pessoa{
 
 	public double getSalario() {
 		return salario;
+	}
+	
+	public String getStringSalario() {
+		return String.format("%.2f", salario);
 	}
 
 	public void setSalario(double salario) {
@@ -53,7 +64,7 @@ public class Funcionario extends Pessoa{
 	@Override
 	public String toString() {
 		return super.toString() +
-				" | Cargo=" + cargo + " | Setor= " + setor +
-				"Data da contratação= " + dataContratacao + " | Salário= " + salario;
+				" | Cargo: " + cargo + " | Setor: " + setor +
+				"Data da contratação: " + getStringDataContratacao() + " | Salário: " + getStringSalario();
 	}
 }

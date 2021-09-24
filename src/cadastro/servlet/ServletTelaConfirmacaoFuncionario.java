@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cadastro.modelo.Aluno;
+import cadastro.modelo.Funcionario;
 
-@WebServlet("/ServletTelaFinalCadastroAluno")
-public class ServletTelaFinalCadastroAluno extends HttpServlet {
+@WebServlet("/ServletTelaConfirmacaoFuncionario")
+public class ServletTelaConfirmacaoFuncionario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PrintWriter saida= response.getWriter();
@@ -32,13 +32,18 @@ public class ServletTelaFinalCadastroAluno extends HttpServlet {
 		String endereco= request.getParameter("campo-endereco");
 		String telefone= request.getParameter("campo-telefone");
 		String email= request.getParameter("campo-email");
-		String matricula= request.getParameter("campo-matricula");		
-		int serie= Integer.parseInt(request.getParameter("campo-serie"));
-		String turma= request.getParameter("campo-turma");	
-		
-		Aluno aluno= new Aluno(nome, genero, 
+		String matricula= request.getParameter("campo-matricula");	
+		String cargo= request.getParameter("campo-cargo");
+		String setor= request.getParameter("campo-setor");
+		int diaContratacao= Integer.parseInt(request.getParameter("campo-contratacao-dia"));
+		int mesContratacao= Integer.parseInt(request.getParameter("campo-contratacao-mes"));
+		int anoContratacao= Integer.parseInt(request.getParameter("campo-contratacao-ano"));
+		double salario= Double.parseDouble(request.getParameter("campo-salario"));
+	
+		Funcionario funcionario= new Funcionario(nome, genero, 
 				LocalDateTime.of(anoNascimento, mesNascimento, diaNascimento, 0, 0), 
-				endereco, telefone, email, matricula, serie, turma);
+				endereco, telefone, email, matricula, cargo, setor, 
+				LocalDateTime.of(anoContratacao, mesContratacao, diaContratacao, 0, 0),  salario);
 		
 		saida.write("<!DOCTYPE html>");
 		saida.write("<html lang=\"pt-br\">");	
@@ -52,15 +57,17 @@ public class ServletTelaFinalCadastroAluno extends HttpServlet {
 		
 		saida.write("<h1>Cadastro concluido!</h1>");
 		
-		saida.write("<p>Nome: " + aluno.getNome() + " | ");
-		saida.write(aluno.getStringGenero() + " | ");
-		saida.write("Data de nascimento: " + aluno.getStringDataNascimento() + "</p>");
-		saida.write("<p>Endereco: " + aluno.getEndereco() + "</p>");	
-		saida.write("<p>Telefone: " + aluno.getTelefone() + " | ");	
-		saida.write("E-mail: " + aluno.getEmail() + "</p>");	
-		saida.write("<p>Matricula: " + aluno.getMatricula() + " | ");	
-		saida.write("Serie: " + aluno.getSerie() + "º ano | ");
-		saida.write("Turma: " + aluno.getTurma() + "</p>");
+		saida.write("<p>Nome: " + funcionario.getNome() + " | ");
+		saida.write(funcionario.getStringGenero() + " | ");
+		saida.write("Data de nascimento: " + funcionario.getStringDataNascimento() + "</p>");
+		saida.write("<p>Endereco: " + funcionario.getEndereco() + "</p>");	
+		saida.write("<p>Telefone: " + funcionario.getTelefone() + " | ");	
+		saida.write("E-mail: " + funcionario.getEmail() + "</p>");	
+		saida.write("<p>Matricula: " + funcionario.getMatricula() + " | ");	
+		saida.write(funcionario.getCargo() + " | ");
+		saida.write("Setor: " + funcionario.getSetor() + "</p>");
+		saida.write("<p>Data de contratacao: " + funcionario.getStringDataNascimento() + " | ");
+		saida.write("Salario: R$" + funcionario.getStringSalario() + "</p>");
 		
 		saida.write("</body>");
 		saida.write("</html>");
