@@ -1,8 +1,11 @@
 package cadastro.modelo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Pessoa {
+	
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private String nome;
 	private boolean genero;
@@ -16,10 +19,12 @@ public class Pessoa {
 			String email, String matricula) {
 		
 		this.nome = nome;
+		this.genero = genero;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
+		this.matricula = matricula;
 	}
 
 	public String getNome() {
@@ -30,6 +35,10 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
+	public String getStringGenero() {
+		return (genero? "masculino" : "feminino");
+	}
+	
 	public boolean getGenero() {
 		return genero;
 	}
@@ -40,6 +49,10 @@ public class Pessoa {
 
 	public LocalDateTime getDataNascimento() {
 		return dataNascimento;
+	}
+	
+	public String getStringDataNascimento() {
+		return dataNascimento.format(formatter);
 	}
 
 	public void setDataNascimento(LocalDateTime dataNascimento) {
@@ -80,8 +93,9 @@ public class Pessoa {
 	
 	@Override
 	public String toString() {
-		return "Nome= " + nome + " | " + genero + " | Nascimento= " + dataNascimento + "\nEndereço= "
-				+ endereco + "\nTelefone= " + telefone + " | E-mail= " + email +
-				"\nMatrícula= " + matricula;
+		return "Nome: " + nome + " | " + getStringGenero() + 
+				" | Nascimento: " + getStringDataNascimento() + "\nEndereço: "
+				+ endereco + "\nTelefone: " + telefone + " | E-mail: " + email +
+				"\nMatrícula: " + matricula;
 	}	
 }
