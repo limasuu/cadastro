@@ -12,13 +12,21 @@ public class Funcionario extends Pessoa{
 	private LocalDateTime dataContratacao;
 	private double salario;
 	
-	public Funcionario(String nome, boolean genero, LocalDateTime dataNascimento, String endereco, String telefone,
-			String email, String matricula, String cargo, String setor, LocalDateTime dataContratacao, double salario) {
+	public Funcionario(String nome, boolean genero, LocalDateTime dataNascimento, 
+			String endereco, String telefone, String email, String matricula, 
+			String cargo, String setor, LocalDateTime dataContratacao, double salario) {
+		
 		super(nome, genero, dataNascimento, endereco, telefone, email, matricula);
 		this.cargo = cargo;
 		this.setor = setor;
 		this.dataContratacao = dataContratacao;
 		this.salario = salario;
+	}
+	
+	public Funcionario(String nome, boolean genero, LocalDateTime dataNascimento, 
+			String endereco, String telefone, String email, String matricula) {
+		
+		super(nome, genero, dataNascimento, endereco, telefone, email, matricula);
 	}
 
 	public String getCargo() {

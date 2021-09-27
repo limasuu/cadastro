@@ -7,12 +7,18 @@ public class Aluno extends Pessoa{
 	private int serie;
 	private String turma;
 	
-	public Aluno(String nome, boolean genero, LocalDateTime dataNascimento, String endereco, String telefone,
-			String email, String matricula, int serie, String turma) {
+	public Aluno(String nome, boolean genero, LocalDateTime dataNascimento, String endereco, 
+			String telefone, String email, String matricula, int serie, String turma) {
 		
 		super(nome, genero, dataNascimento, endereco, telefone, email, matricula);
 		this.serie = serie;
 		this.turma = turma;
+	}
+	
+	public Aluno(String nome, boolean genero, LocalDateTime dataNascimento, String endereco, 
+			String telefone, String email, String matricula) {
+		
+		super(nome, genero, dataNascimento, endereco, telefone, email, matricula);
 	}
 
 	public int getSerie() {

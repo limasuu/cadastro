@@ -35,10 +35,11 @@ public class ServletTelaInicialCadastro extends HttpServlet {
 		String matricula= request.getParameter("campo-matricula");		
 		String tipoPessoa= request.getParameter("campo-tipo-pessoa");
 							
-		Pessoa pessoa= new Pessoa(nome, genero, 
-				LocalDateTime.of(anoNascimento, mesNascimento, diaNascimento, 0, 0), 
-				endereco, telefone, email, matricula);
 		TelaTipoPessoa telaTipoPessoa= TelaTipoPessoa.getValue(tipoPessoa);
+		Pessoa pessoa= telaTipoPessoa.getPessoa(nome, genero, 
+				LocalDateTime.of(anoNascimento, mesNascimento, diaNascimento, 0, 0), 
+				endereco, telefone, email, matricula);		
+		String proximaTela= telaTipoPessoa.getProximaTela();
 		
 		saida.write("<!DOCTYPE html>");
 		saida.write("<html lang=\"pt-br\">");	
@@ -52,7 +53,13 @@ public class ServletTelaInicialCadastro extends HttpServlet {
 		
 		saida.write("<h1>Cadastro</h1>");
 				
+		saida.write("<form action=\"" + proximaTela + "\">");
+		
 		telaTipoPessoa.apresentarCadastro(pessoa, saida);
+		
+		saida.write("<button type=\"submit\">Proxima pagina</button>");
+
+		saida.write("</form>");
 		
 		saida.write("</body>");
 		saida.write("</html>");
