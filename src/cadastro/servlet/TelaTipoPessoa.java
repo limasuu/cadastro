@@ -16,17 +16,8 @@ public enum TelaTipoPessoa implements TelaPessoa{
 
 		@Override
 		public void apresentarCadastro(Pessoa pessoa, PrintWriter saida) {
-
-			saida.write("<input type=\"hidden\" name=\"campo-nome\" value=\"" + pessoa.getNome() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-genero\" value=\"" + pessoa.getGenero() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-nascimento-dia\" value=\"" + pessoa.getDataNascimento().getDayOfMonth() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-nascimento-mes\" value=\"" + pessoa.getDataNascimento().getMonthValue() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-nascimento-ano\" value=\"" + pessoa.getDataNascimento().getYear() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-endereco\" value=\"" + pessoa.getEndereco() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-telefone\" value=\"" + pessoa.getTelefone() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-email\" value=\"" + pessoa.getEmail() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-matricula\" value=\"" + pessoa.getMatricula() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-tipo-pessoa\" value=\"" + getTipoPessoa() + "\"/>");
+			
+			saida.write("<input type=\"hidden\" name=\"campo-tipo-pessoa\" value=\"" + name() + "\"/>");
 			
 			saida.write("<label for=\"campo-serie\" class=\"descricao-campo\">Serie</label>");	
 			saida.write("<select name=\"campo-serie\" class=\"descricao-campo\">");
@@ -76,7 +67,7 @@ public enum TelaTipoPessoa implements TelaPessoa{
 		@Override
 		public void apresentarCadastro(Pessoa pessoa, PrintWriter saida) {
 
-			saida.write("<input type=\"hidden\" name=\"campo-tipo-pessoa\" value=\"" + getTipoPessoa() + "\"/>");
+			saida.write("<input type=\"hidden\" name=\"campo-tipo-pessoa\" value=\"" + name() + "\"/>");
 			saida.write("<input type=\"hidden\" name=\"campo-cargo\" value=\"" + getTipoPessoa() + "\"/>");
 			
 			FUNCIONARIO.apresentarCadastro(pessoa, saida);
@@ -111,23 +102,13 @@ public enum TelaTipoPessoa implements TelaPessoa{
 			return new Professor(nome, genero, dataNascimento, endereco, telefone, email, matricula);
 		}
 	},	
-	FUNCIONARIO("funcionario"){
+	FUNCIONARIO("funcionário"){
 
 		@Override
 		public void apresentarCadastro(Pessoa pessoa, PrintWriter saida) {
 
-			saida.write("<input type=\"hidden\" name=\"campo-nome\" value=\"" + pessoa.getNome() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-genero\" value=\"" + pessoa.getGenero() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-nascimento-dia\" value=\"" + pessoa.getDataNascimento().getDayOfMonth() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-nascimento-mes\" value=\"" + pessoa.getDataNascimento().getMonthValue() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-nascimento-ano\" value=\"" + pessoa.getDataNascimento().getYear() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-endereco\" value=\"" + pessoa.getEndereco() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-telefone\" value=\"" + pessoa.getTelefone() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-email\" value=\"" + pessoa.getEmail() + "\"/>");
-			saida.write("<input type=\"hidden\" name=\"campo-matricula\" value=\"" + pessoa.getMatricula() + "\"/>");
-
 			if( !(pessoa instanceof Professor) ) {
-				saida.write("<input type=\"hidden\" name=\"campo-tipo-pessoa\" value=\"" + getTipoPessoa() + "\"/>");
+				saida.write("<input type=\"hidden\" name=\"campo-tipo-pessoa\" value=\"" + name() + "\"/>");
 				
 				saida.write("<label for=\"campo-cargo\" class=\"descricao-campo\">Cargo</label>");
 				saida.write("<input type=\"text\" name=\"campo-cargo\" class=\"campo\"/><br/>");
@@ -146,7 +127,7 @@ public enum TelaTipoPessoa implements TelaPessoa{
 		@Override
 		public void apresentarConfirmacao(Pessoa pessoa, PrintWriter saida, HttpServletRequest request) {
 			
-			String cargo= request.getParameter("campo-cargo");
+			String cargo= request.getParameter("campo-cargo");			
 			String setor= request.getParameter("campo-setor");
 			int diaContratacao= Integer.parseInt(request.getParameter("campo-contratacao-dia"));
 			int mesContratacao= Integer.parseInt(request.getParameter("campo-contratacao-mes"));
@@ -178,23 +159,14 @@ public enum TelaTipoPessoa implements TelaPessoa{
 			return new Funcionario(nome, genero, dataNascimento, endereco, telefone, email, matricula);
 		}
 	};
-
+	
 	private String tipoPessoa;
 
 	private TelaTipoPessoa(String tipoPessoa) {
-		this.tipoPessoa = tipoPessoa;
+		this.tipoPessoa= tipoPessoa;
 	}
 
 	public String getTipoPessoa() {
 		return tipoPessoa;
-	}
-
-	public static TelaTipoPessoa getValue(String tipoPessoa) {
-
-		for(TelaTipoPessoa tipo : values())
-			if(tipoPessoa.equals(tipo.getTipoPessoa()))
-				return tipo;
-
-		return null;
 	}
 }

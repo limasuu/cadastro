@@ -35,7 +35,7 @@ public class ServletTelaInicialCadastro extends HttpServlet {
 		String matricula= request.getParameter("campo-matricula");		
 		String tipoPessoa= request.getParameter("campo-tipo-pessoa");
 							
-		TelaTipoPessoa telaTipoPessoa= TelaTipoPessoa.getValue(tipoPessoa);
+		TelaTipoPessoa telaTipoPessoa= TelaTipoPessoa.valueOf(tipoPessoa);
 		Pessoa pessoa= telaTipoPessoa.getPessoa(nome, genero, 
 				LocalDateTime.of(anoNascimento, mesNascimento, diaNascimento, 0, 0), 
 				endereco, telefone, email, matricula);		
@@ -54,6 +54,16 @@ public class ServletTelaInicialCadastro extends HttpServlet {
 		saida.write("<h1>Cadastro</h1>");
 				
 		saida.write("<form action=\"" + proximaTela + "\">");
+		
+		saida.write("<input type=\"hidden\" name=\"campo-nome\" value=\"" + pessoa.getNome() + "\"/>");
+		saida.write("<input type=\"hidden\" name=\"campo-genero\" value=\"" + pessoa.getGenero() + "\"/>");
+		saida.write("<input type=\"hidden\" name=\"campo-nascimento-dia\" value=\"" + pessoa.getDataNascimento().getDayOfMonth() + "\"/>");
+		saida.write("<input type=\"hidden\" name=\"campo-nascimento-mes\" value=\"" + pessoa.getDataNascimento().getMonthValue() + "\"/>");
+		saida.write("<input type=\"hidden\" name=\"campo-nascimento-ano\" value=\"" + pessoa.getDataNascimento().getYear() + "\"/>");
+		saida.write("<input type=\"hidden\" name=\"campo-endereco\" value=\"" + pessoa.getEndereco() + "\"/>");
+		saida.write("<input type=\"hidden\" name=\"campo-telefone\" value=\"" + pessoa.getTelefone() + "\"/>");
+		saida.write("<input type=\"hidden\" name=\"campo-email\" value=\"" + pessoa.getEmail() + "\"/>");
+		saida.write("<input type=\"hidden\" name=\"campo-matricula\" value=\"" + pessoa.getMatricula() + "\"/>");
 		
 		telaTipoPessoa.apresentarCadastro(pessoa, saida);
 		

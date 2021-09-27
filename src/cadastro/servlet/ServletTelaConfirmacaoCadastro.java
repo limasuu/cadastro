@@ -35,7 +35,7 @@ public class ServletTelaConfirmacaoCadastro extends HttpServlet {
 		String matricula= request.getParameter("campo-matricula");			
 		String tipoPessoa= request.getParameter("campo-tipo-pessoa");		
 
-		TelaTipoPessoa telaTipoPessoa= TelaTipoPessoa.getValue(tipoPessoa);
+		TelaTipoPessoa telaTipoPessoa= TelaTipoPessoa.valueOf(tipoPessoa);
 		Pessoa pessoa= telaTipoPessoa.getPessoa(nome, genero, 
 				LocalDateTime.of(anoNascimento, mesNascimento, diaNascimento, 0, 0), 
 				endereco, telefone, email, matricula);

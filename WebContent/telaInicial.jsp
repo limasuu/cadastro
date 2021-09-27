@@ -48,9 +48,9 @@
 			
 			
 			<select name="campo-tipo-pessoa">
-				<option value="aluno" selected="selected">Aluno</option>
-				<option value="professor">Professor</option>
-				<option value="funcionario">Funcionário</option>
+				<option value="ALUNO" selected="selected">Aluno</option>
+				<option value="PROFESSOR">Professor</option>
+				<option value="FUNCIONARIO">Funcionário</option>
 			</select>
 			
 			<br/><br/>
